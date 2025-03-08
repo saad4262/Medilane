@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:medilane/res/colors/app_color.dart';
 
 class FontSizes {
-  static const double small = 9.0;
-  static const double extraSmall = 13.0;
-  static const double medium = 16.0;
+  static const double extraSmall = 9.0;
+  static const double  small = 13.0;
+  static const double medium = 15.0;
   static const double large = 18.0;
-  static const double extraLarge = 20.0;
+  static const double mediumHeadline = 20.0;
   static const double headline = 24.0;
-  static const double title = 27.0;
+  static const double title = 30.0;
   static const double display = 37.0;
 }
 
@@ -18,39 +19,63 @@ class AppStyle {
     // fontWeight: FontWeight.w500,
   );
 
+  static TextStyle richDescriptions = TextStyle(
+    fontSize: FontSizes.medium,
+    fontFamily: 'poppins',
+    // fontWeight: FontWeight.w500,
+    color: AppColor.blueMain
+  );
+
   static TextStyle headings = TextStyle(
-    fontSize: FontSizes.headline,
+    fontSize: FontSizes.mediumHeadline,
     fontFamily: 'poppins',
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle txtFootnote = TextStyle(
-    fontSize: FontSizes.extraSmall,
+  static TextStyle richHeadings = TextStyle(
+    fontSize: FontSizes.mediumHeadline,
     fontFamily: 'poppins',
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
+    color: AppColor.blueMain
   );
 
-  static TextStyle txtHeadline = TextStyle(
-    fontSize: FontSizes.large,
-    fontFamily: 'poppins',
-    fontWeight: FontWeight.w700,
-  );
 
-  static TextStyle txtSFProDisplaySemibold21 = TextStyle(
-    fontSize: FontSizes.headline,
-    fontFamily: 'poppins',
-    fontWeight: FontWeight.w600,
-  );
-
-  static TextStyle txtSFUITextSemibold27 = TextStyle(
+  static TextStyle headings2 = TextStyle(
     fontSize: FontSizes.title,
     fontFamily: 'poppins',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.bold,
+      color: AppColor.blackColor
+
   );
 
-  static TextStyle txtBerkshireSwashRegular37 = TextStyle(
-    fontSize: FontSizes.display,
+  static TextStyle richHeadings2 = TextStyle(
+      fontSize: FontSizes.title,
+      fontFamily: 'poppins',
+      fontWeight: FontWeight.bold,
+      color: AppColor.blueMain
+
+  );
+
+
+  static TextStyle text = TextStyle(
+    fontSize: FontSizes.medium,
     fontFamily: 'poppins',
     fontWeight: FontWeight.w400,
+      color: AppColor.blackColor
+
+  );
+  static TextStyle richText = TextStyle(
+    fontSize: FontSizes.medium,
+    fontFamily: 'poppins',
+    fontWeight: FontWeight.bold,
+    color: AppColor.blueMain
+  );
+
+  static TextStyle smallDescriptions = TextStyle(
+      fontSize: FontSizes.small,
+      fontFamily: 'poppins',
+      // fontWeight: FontWeight.w400,
+      color: AppColor.blackColor
+
   );
 }

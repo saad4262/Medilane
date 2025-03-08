@@ -1,0 +1,2 @@
+D:/Android Studio/FYP/medilane/android/app/.cxx/Debug/5v5j1g94/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/Android Studio/FYP/medilane/android/app/.cxx/Debug/5v5j1g94/armeabi-v7a/CMakeFiles/rebuild_cache.dir
