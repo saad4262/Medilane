@@ -7,7 +7,7 @@ import '../colors/app_color.dart';
 class RoundButton extends StatelessWidget {
 
   const RoundButton({
-    Key? key ,
+    super.key ,
     this.buttonColor = AppColor.primaryButtonColor  ,
     this.textColor = AppColor.primaryTextColor ,
     required this.title ,
@@ -15,7 +15,7 @@ class RoundButton extends StatelessWidget {
     this.width = 60 ,
     this.height = 50 ,
   this.loading = false
-  }) : super(key: key);
+  });
 
 
   final bool loading;

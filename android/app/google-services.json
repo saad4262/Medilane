@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:642155354036:android:4432e2bfb99bec46b744e1",
+        "android_client_info": {
+          "package_name": "com.example.adminpanel1medilane"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC00yOiYvHEwyQWtjzAJtlwDDTR_ARs0HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:642155354036:android:b692fbe557e00c52b744e1",
         "android_client_info": {
           "package_name": "com.example.medilane"

@@ -10,6 +10,10 @@ class RouteName {
   static const String MapScreen = '/locationscreen1' ;
   static const String ProfileScreen = '/profilescreen' ;
   static const String HomeScreen = '/homescreen' ;
+  static const String DetailScreen = '/detailscreen' ;
+  static const String CheckoutScreen = '/checkoutscreen' ;
+  static const String BankAccountScreen = '/bankaccountscreen' ;
+
 
 
 

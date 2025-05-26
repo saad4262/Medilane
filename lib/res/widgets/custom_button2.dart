@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:medilane/res/colors/app_color.dart';
 import '../media-queries/media_query.dart';
 
 class CustomButton2 extends StatelessWidget {
@@ -15,7 +13,7 @@ class CustomButton2 extends StatelessWidget {
   final double? width;
   final double? height;
 
-  CustomButton2({
+  const CustomButton2({
     super.key,
     required this.text,
     required this.onPressed,
@@ -33,7 +31,7 @@ class CustomButton2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQueryHelper(context);
 
-    return Container(
+    return SizedBox(
       width: isFullWidth ? double.infinity : width ?? 200, // Default width: 200
       height: height ?? 50, // Default height: 50
       child: ElevatedButton(

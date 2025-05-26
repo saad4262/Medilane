@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomShimmerScreen extends StatelessWidget {
+  const CustomShimmerScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

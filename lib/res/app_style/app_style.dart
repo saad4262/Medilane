@@ -26,6 +26,13 @@ class AppStyle {
     color: AppColor.blueMain
   );
 
+  static TextStyle btnText = TextStyle(
+      fontSize: FontSizes.medium,
+      fontFamily: 'poppins',
+      // fontWeight: FontWeight.w500,
+      color: AppColor.whiteColor
+  );
+
   static TextStyle headings = TextStyle(
     fontSize: FontSizes.mediumHeadline,
     fontFamily: 'poppins',
@@ -56,6 +63,12 @@ class AppStyle {
 
   );
 
+  static TextStyle richHeadings3 = TextStyle(
+      fontSize: FontSizes.title,
+      fontFamily: 'poppins',
+      // fontWeight: FontWeight.bold,
+      color: AppColor.blueMain
+  );
 
   static TextStyle text = TextStyle(
     fontSize: FontSizes.medium,

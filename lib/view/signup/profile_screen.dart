@@ -25,10 +25,10 @@ class ProfileScreen extends StatelessWidget {
   Widget _customRadioButton(
 
 
-  String text, String groupValue, AuthController controller,  BuildContext context, // ✅ Pass context as a parameter
+      String text, String groupValue, AuthController controller,  BuildContext context, // ✅ Pass context as a parameter
       )
   {
-  final mediaQuery = MediaQueryHelper(context);
+    final mediaQuery = MediaQueryHelper(context);
 
     return GestureDetector(
 
@@ -47,15 +47,15 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: groupValue == text
                 ? Center(
-                    child: Container(
-                      width:  mediaQuery.width(6),
-                      height:  mediaQuery.height(6),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.greenMain,
-                      ),
-                    ),
-                  )
+              child: Container(
+                width:  mediaQuery.width(6),
+                height:  mediaQuery.height(6),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColor.greenMain,
+                ),
+              ),
+            )
                 : null,
           ),
           SizedBox(width: mediaQuery.width(6)),
@@ -119,8 +119,8 @@ class ProfileScreen extends StatelessWidget {
                       TextSpan(
                           text: " information".tr,
                           style:
-                              AppStyle.richHeadings2 // Change color as needed
-                          ),
+                          AppStyle.richHeadings2 // Change color as needed
+                      ),
                     ],
                   ),
                 ),
@@ -133,7 +133,7 @@ class ProfileScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text("below".tr,
                     style: AppStyle.richHeadings2 // Change color as needed
-                    ),
+                ),
               ),
             ),
             SizedBox(
@@ -146,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text("You can edit this later on your account setting.".tr,
                     style: AppStyle.smallDescriptions // Change color as needed
-                    ),
+                ),
               ),
             ),
             SizedBox(
@@ -158,28 +158,28 @@ class ProfileScreen extends StatelessWidget {
                 controller.pickImage(); // Call image picker function
               },
               child: Obx(() => Stack(children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: controller.selectedImage.value != null
-                          ? FileImage(controller.selectedImage.value!)
-                              as ImageProvider
-                          : (controller.profileImage.value.isNotEmpty
-                              ? NetworkImage(controller.profileImage.value)
-                              : AssetImage("assets/images/person1.png")
-                                  as ImageProvider),
-                    ),
-                    Positioned(
-                        bottom: 2,
-                        right: 4,
-                        child: CircleAvatar(
-                            radius: 16,
-                            backgroundColor: AppColor.blueMain,
-                            child: Icon(
-                              Icons.edit,
-                              color: AppColor.whiteColor,
-                              size: 18,
-                            )))
-                  ])),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: controller.selectedImage.value != null
+                      ? FileImage(controller.selectedImage.value!)
+                  as ImageProvider
+                      : (controller.profileImage.value.isNotEmpty
+                      ? NetworkImage(controller.profileImage.value)
+                      : AssetImage("assets/images/person1.png")
+                  as ImageProvider),
+                ),
+                Positioned(
+                    bottom: 2,
+                    right: 4,
+                    child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: AppColor.blueMain,
+                        child: Icon(
+                          Icons.edit,
+                          color: AppColor.whiteColor,
+                          size: 18,
+                        )))
+              ])),
             ),
             SizedBox(
               height: mediaQuery.height(5),
@@ -217,12 +217,12 @@ class ProfileScreen extends StatelessWidget {
 
             // 📌 Date of Birth Picker
             Obx(
-              () => Padding(
+                  () => Padding(
                 padding: mediaQuery.paddingOnly(left: 7, right: 7),
                 child: TextField(
                   decoration: InputDecoration(
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical: 25.0, horizontal: 20.0),
 
                     hintText: "Date of Birth".tr,
                     prefixIcon: Icon(
@@ -241,12 +241,12 @@ class ProfileScreen extends StatelessWidget {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide:
-                          BorderSide(color: Color(0xFFE8E8E8), width: mediaQuery.width(2)),
+                      BorderSide(color: Color(0xFFE8E8E8), width: mediaQuery.width(2)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide:
-                          BorderSide(color: Color(0xFF1F4C6B), width: mediaQuery.width(2)),
+                      BorderSide(color: Color(0xFF1F4C6B), width: mediaQuery.width(2)),
                     ),
                   ),
                   readOnly: true,
@@ -274,15 +274,15 @@ class ProfileScreen extends StatelessWidget {
 
             // 📌 Gender Selection (Radio Buttons)
             Obx(() => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _customRadioButton(
-                        "Male".tr, controller.selectedGender.value, controller,context),
-                    SizedBox(width: mediaQuery.width(20)),
-                    _customRadioButton(
-                        "Female".tr, controller.selectedGender.value, controller,context),
-                  ],
-                )),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _customRadioButton(
+                    "Male".tr, controller.selectedGender.value, controller,context),
+                SizedBox(width: mediaQuery.width(20)),
+                _customRadioButton(
+                    "Female".tr, controller.selectedGender.value, controller,context),
+              ],
+            )),
 
             SizedBox(height: 30),
 
@@ -298,48 +298,51 @@ class ProfileScreen extends StatelessWidget {
             // ),
 
             Obx(() => CustomButton(
-                  text: "Finish".tr,
-                  onPressed: () {
-                    //
-                    // controller.updateProfile(
-                    //   controller.user.value!.uid,
-                    //   controller.user.value!.phone,
-                    //   controller.selectedDate.value,
-                    //   controller.selectedGender.value,
+              text: "Finish".tr,
+              onPressed: () {
+                //
+                // controller.updateProfile(
+                //   controller.user.value!.uid,
+                //   controller.user.value!.phone,
+                //   controller.selectedDate.value,
+                //   controller.selectedGender.value,
 
-                    if (controller.user.value == null ||
+                if (controller.user.value == null ||
                     controller.user.value!.uid.isEmpty ||
                     controller.user.value!.phone.isEmpty ||
                     controller.selectedDate.value == null ||
                     controller.selectedGender.value.isEmpty) {
-                    Get.snackbar(
+                  Get.snackbar(
                     "Error",
                     "Please fill in all fields before proceeding.",
                     backgroundColor: Colors.red,
                     colorText: Colors.white,
-                    );
-                    } else {
-                      controller.updateProfile(
-                        controller.user.value!.uid,
-                        controller.user.value!.phone,
-                        controller.selectedDate.value,
-                        controller.selectedGender.value,
-                          showSuccessBottomSheet(context)
+                  );
+                } else {
+                  controller.updateProfile(
+                      controller.user.value!.uid,
+                      controller.user.value!.phone,
+                      controller.user.value!.email,
+                      controller.user.value!.username,
+                      controller.selectedDate.value,
+                      controller.selectedGender.value,
 
-                      );
+                      showSuccessBottomSheet(context)
 
-                    }
+                  );
+
+                }
 
 
-                  },
-                  isLoading: controller.isLoading.value,
-                  color: AppColor.greenMain,
-                  textColor: AppColor.whiteColor,
-                  borderRadius: 12,
-                  isFullWidth: false,
-                  height: mediaQuery.height(7),
-                  width: mediaQuery.width(70),
-                )),
+              },
+              isLoading: controller.isLoading.value,
+              color: AppColor.greenMain,
+              textColor: AppColor.whiteColor,
+              borderRadius: 12,
+              isFullWidth: false,
+              height: mediaQuery.height(7),
+              width: mediaQuery.width(70),
+            )),
           ],
         ),
       ),
@@ -401,16 +404,16 @@ void showSuccessBottomSheet(BuildContext context) {
             ),
             SizedBox(height:mediaQuery.height(5)),
 
-               CustomButton2(
-                text: "Done",
-                color: Color(0xFF8BC83F),
-                textColor: Colors.white,
-                borderRadius: 10,
-                height: mediaQuery.height(5),
-                width:mediaQuery.width(50),
-                onPressed: () {
-              Get.toNamed(RouteName.HomeScreen);
-                },
+            CustomButton2(
+              text: "Done",
+              color: Color(0xFF8BC83F),
+              textColor: Colors.white,
+              borderRadius: 10,
+              height: mediaQuery.height(5),
+              width:mediaQuery.width(50),
+              onPressed: () {
+                Get.toNamed(RouteName.HomeScreen);
+              },
 
             ),
           ],

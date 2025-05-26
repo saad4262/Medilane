@@ -15,6 +15,10 @@ class ImageAssets {
   static const String SignupScreen1 = 'assets/images/signup1.png' ;
 
   static const String marker = 'assets/images/marker.png' ;
+  static const String panadol = 'assets/images/panadol.png' ;
+  static const String profile = 'assets/images/person1.png' ;
+
+
 
 
 

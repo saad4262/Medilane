@@ -1,7 +1,5 @@
 import '../../models/auth/user_model.dart';
-import '../../services/location_service.dart';
 
-import 'package:geolocator/geolocator.dart';
 
 
 

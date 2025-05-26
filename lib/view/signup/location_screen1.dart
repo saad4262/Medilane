@@ -1,19 +1,7 @@
-import 'dart:convert';
-import 'dart:math';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:convert';
-import 'dart:math';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medilane/res/assets/image_assets.dart';
 import 'package:medilane/res/routes/routes_name.dart';
 import 'package:medilane/res/widgets/custom_button.dart';
@@ -22,13 +10,12 @@ import '../../res/colors/app_color.dart';
 import '../../res/media-queries/media_query.dart';
 import '../../view_models/location_vm.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapView extends StatelessWidget {
-  final MapController controller = Get.put(MapController());
-  final AuthController authController = Get.put(AuthController());
+  late  MapController controller = Get.put(MapController());
+  late AuthController authController = Get.put(AuthController());
+
+   MapView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +126,7 @@ class MapView extends StatelessWidget {
                         const SizedBox(height: 5),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               height: 50,
                               child: Image.asset(ImageAssets.marker),
                             ),

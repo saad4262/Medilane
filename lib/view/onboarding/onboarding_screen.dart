@@ -7,14 +7,13 @@ import 'package:medilane/res/colors/app_color.dart';
 // import 'package:medilane/view/login/widgets/input_password_widget.dart';
 // import 'package:medilane/view/login/widgets/login_button_widget.dart';
 
-import '../../data/response/status.dart';
 import '../../res/app_style/app_style.dart';
 import '../../res/media-queries/media_query.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/OnboardingScreen_vm/onboardingScreen_vm.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  final OnboardingController controller = Get.put(OnboardingController());
+  late OnboardingController controller = Get.put(OnboardingController());
 
 
 
@@ -37,6 +36,8 @@ class OnboardingScreen extends StatelessWidget {
     },
   ];
 
+   OnboardingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQueryHelper(context);
@@ -46,23 +47,23 @@ class OnboardingScreen extends StatelessWidget {
         children: [
 
           SizedBox(height: mediaQuery.height(8),),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                  onTap: () { Get.updateLocale(Locale("en","US"));},
-
-                  child: Text("Eng",style: AppStyle.descriptions,)),
-              Padding(
-                padding: mediaQuery.paddingOnly(right: 5),
-                child: Align(
-                    alignment: Alignment.topRight,
-                    child: InkWell(
-                        onTap:() { Get.updateLocale(Locale("ur","PK"));},
-                        child: Text("اردو", style: AppStyle.descriptions))),
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     InkWell(
+          //         onTap: () { Get.updateLocale(Locale("en","US"));},
+          //
+          //         child: Text("Eng",style: AppStyle.descriptions,)),
+          //     Padding(
+          //       padding: mediaQuery.paddingOnly(right: 5),
+          //       child: Align(
+          //           alignment: Alignment.topRight,
+          //           child: InkWell(
+          //               onTap:() { Get.updateLocale(Locale("ur","PK"));},
+          //               child: Text("اردو", style: AppStyle.descriptions))),
+          //     ),
+          //   ],
+          // ),
           Expanded(
             child: PageView.builder(
               controller: controller.pageController,
@@ -74,7 +75,7 @@ class OnboardingScreen extends StatelessWidget {
                   children: [
                     Image.asset(pages[index]["image"]!, height: mediaQuery.height(35)),
                     SizedBox(height: mediaQuery.height(10)),
-                    Container(
+                    SizedBox(
                       height: mediaQuery.height(34),
                       width :mediaQuery.width(90),
                       child: Card(
@@ -133,16 +134,17 @@ class OnboardingScreen extends StatelessWidget {
                                     },
                                         child: CircleAvatar(
 
-                                                                            child: Icon(Icons.arrow_forward,color: AppColor.whiteColor,),
                                                                             backgroundColor: AppColor.greenMain,
+
+                                                                            child: Icon(Icons.arrow_forward,color: AppColor.whiteColor,),
                                                                           ),
                                       )
                                       : InkWell(
                                   onTap : controller.nextPage,
                 child: CircleAvatar(
                   radius: 25,
-                child: Icon(Icons.arrow_forward,color: AppColor.whiteColor,),
                 backgroundColor: AppColor.greenMain,
+                child: Icon(Icons.arrow_forward,color: AppColor.whiteColor,),
                                                                           // SizedBox(height: 30),
 
                 )))],

@@ -8,7 +8,7 @@ import '../colors/app_color.dart';
 
 class GeneralExceptionWidget extends StatefulWidget {
   final VoidCallback onPress ;
-  const GeneralExceptionWidget({Key? key , required this.onPress}) : super(key: key);
+  const GeneralExceptionWidget({super.key , required this.onPress});
 
   @override
   State<GeneralExceptionWidget> createState() => _GeneralExceptionWidgetState();

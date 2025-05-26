@@ -74,7 +74,7 @@ class NetworkApiServices extends BaseApiServices {
         return responseJson ;
 
       default :
-        throw FetchDataException('Error accoured while communicating with server '+response.statusCode.toString()) ;
+        throw FetchDataException('Error accoured while communicating with server ${response.statusCode}') ;
     }
   }
 

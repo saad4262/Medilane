@@ -8,10 +8,12 @@ import 'package:medilane/view/signup/location_screen1.dart';
 import 'package:medilane/view/signup/profile_screen.dart';
 import 'package:medilane/view/signup/singup_screen1.dart';
 
+import '../../view/home/bank_screen.dart';
+import '../../view/home/checkout_screen.dart';
 import '../../view/home/home_screen.dart';
+import '../../view/home/med_detail.dart';
 import '../../view/login/login_screen2.dart';
 import '../../view/onboarding/onboarding_screen.dart';
-import '../../view/signup/location_screen1.dart';
 // import '../../view/splash_screen.dart';
 
 class AppRoutes {
@@ -73,6 +75,27 @@ class AppRoutes {
     GetPage(
       name: RouteName.HomeScreen,
       page: () => HomeScreen(),
+      transitionDuration: Duration(milliseconds: 250),
+      transition: Transition.rightToLeft ,
+    ),
+
+    // GetPage(
+    //   name: RouteName.DetailScreen,
+    //   page: () => DetailScreen(),
+    //   transitionDuration: Duration(milliseconds: 250),
+    //   transition: Transition.rightToLeft ,
+    // ),
+
+    // GetPage(
+    //   name: RouteName.CheckoutScreen,
+    //   page: () => CheckoutScreen(),
+    //   transitionDuration: Duration(milliseconds: 250),
+    //   transition: Transition.rightToLeft ,
+    // ),
+
+    GetPage(
+      name: RouteName.BankAccountScreen,
+      page: () => BankAccountScreen(),
       transitionDuration: Duration(milliseconds: 250),
       transition: Transition.rightToLeft ,
     ),

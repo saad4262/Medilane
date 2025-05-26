@@ -42,11 +42,42 @@ dependencies:
   geolocator: ^13.0.2
   geocoding: ^3.0.0
   google_maps_webservice: ^0.0.19
-  webview_flutter: ^4.10.0
+#  webview_flutter: ^4.10.0
   image_picker: ^1.1.2
   intl: ^0.20.2
   shimmer: ^3.0.0
+  pdf: ^3.11.3
+
+
+
+  #  flutter_svg: ^2.1.0
   shared_preferences_android: ^2.4.8
+  floating_navbar: ^3.0.0
+  font_awesome_flutter: ^10.8.0
+  flutter_keyboard_visibility: ^6.0.0
+  loading_animation_widget: ^1.3.0
+  lottie: ^3.0.0
+  flutter_slidable: ^4.0.0
+  flutter_dotenv: ^5.2.1
+  flutter_svg: ^2.0.9
+  share_plus: ^11.0.0
+
+
+
+
+
+
+
+
+  #  flutter_stripe: ^11.5.0
+
+  adminpanel1medilane:
+    path: D:\Android Studio\FYP-main\adminpanel1medilane
+
+
+
+
+
 
 
 
@@ -67,6 +98,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  cached_network_image: ^3.3.1
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +127,10 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/lottie/bike.json
+    - key.env
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

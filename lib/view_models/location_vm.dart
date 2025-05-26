@@ -6,26 +6,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_maps_webservice/places.dart';
 
 
 
 
 
-import 'package:get/get.dart';
 import '../models/auth/user_model.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 
 import '../models/auth/user_model.dart' as gmaps;
 import '../repository/location-repo/location-repo.dart';
 
-import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 
-import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 class MapController extends GetxController {
@@ -57,54 +48,52 @@ class MapController extends GetxController {
     try {
       final gmaps.PlaceDetails details = await _repository.fetchPlaceDetails(placeId);
 
-      if (details != null) {
-        selectedLocation.value = LatLng(details.lat, details.lng);
-        selectedPlaceDetails.value = details;
+      selectedLocation.value = LatLng(details.lat, details.lng);
+      selectedPlaceDetails.value = details;
 
-        // Clear old markers before adding a new one
-        markers.clear();
-        markers.add(
-          Marker(
+      // Clear old markers before adding a new one
+      markers.clear();
+      markers.add(
+        Marker(
 
-            markerId: MarkerId(placeId),
-            position: selectedLocation.value,
-            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue), // Change color
+          markerId: MarkerId(placeId),
+          position: selectedLocation.value,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue), // Change color
 
-            infoWindow: InfoWindow(title: details.name, snippet: details.address),
+          infoWindow: InfoWindow(title: details.name, snippet: details.address),
+        ),
+      );
+
+      markers.refresh(); // Ensure UI updates after marker changes
+
+      // Ensure the map controller is initialized
+      if (mapController != null) {
+        await mapController!.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target: selectedLocation.value,
+              zoom: 14.0,
+              tilt: 30.0,
+              bearing: 0,
+            ),
           ),
         );
-
-        markers.refresh(); // Ensure UI updates after marker changes
-
-        // Ensure the map controller is initialized
-        if (mapController != null) {
-          await mapController!.animateCamera(
-            CameraUpdate.newCameraPosition(
-              CameraPosition(
-                target: selectedLocation.value,
-                zoom: 14.0,
-                tilt: 30.0,
-                bearing: 0,
-              ),
-            ),
-          );
-        }
-
-
-
-
-
-
-        await Future.delayed(Duration(milliseconds: 500));
-        mapController?.showMarkerInfoWindow(MarkerId(placeId));
-
-        searchResults.clear();
-        searchResults.refresh(); // Ensure search UI updates
-
-        await saveLocationToFirestore(details.lat, details.lng, details.address);
-
       }
-    } catch (e) {
+
+
+
+
+
+
+      await Future.delayed(Duration(milliseconds: 500));
+      mapController?.showMarkerInfoWindow(MarkerId(placeId));
+
+      searchResults.clear();
+      searchResults.refresh(); // Ensure search UI updates
+
+      await saveLocationToFirestore(details.lat, details.lng, details.address);
+
+        } catch (e) {
       print("Error selecting place: $e");
     }
   }

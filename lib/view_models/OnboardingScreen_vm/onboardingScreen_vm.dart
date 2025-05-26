@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../models/login/user_model.dart';
-import '../../../res/routes/routes_name.dart';
-import '../../../utils/utils.dart';
 
 class OnboardingController extends GetxController {
   var currentPage = 0.obs;

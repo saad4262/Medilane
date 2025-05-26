@@ -10,13 +10,13 @@ class CustomBackButton extends StatelessWidget {
   final double iconSize;
 
   const CustomBackButton({
-    Key? key,
+    super.key,
     this.onTap,
     this.backgroundColor = const Color(0xFFF5F4F8),
     this.iconColor = AppColor.blueMain,
     this.radius = 25,
     this.iconSize = 20,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

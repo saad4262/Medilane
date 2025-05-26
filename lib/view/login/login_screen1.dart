@@ -1,6 +1,5 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medilane/res/app_style/app_style.dart';
@@ -9,9 +8,7 @@ import 'package:medilane/res/routes/routes_name.dart';
 
 import '../../res/assets/image_assets.dart';
 import '../../res/media-queries/media_query.dart';
-import '../../res/widgets/custom_button.dart';
 import '../../res/widgets/custom_button2.dart';
-import 'login_screen2.dart';
 
 class LoginScreen1 extends StatelessWidget {
   const LoginScreen1({super.key});
@@ -115,14 +112,14 @@ class LoginScreen1 extends StatelessWidget {
 
                     height: mediaQuery.height(9),
                     width: mediaQuery.width(30),
-                    child: Image.asset(
-
-                      ImageAssets.googleImage
-                    ),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Color(0xFFE8E8E8)
 
+                    ),
+                    child: Image.asset(
+
+                      ImageAssets.googleImage
                     ),
                   ),
                 ),
@@ -130,13 +127,13 @@ class LoginScreen1 extends StatelessWidget {
                 Container(
                     height: mediaQuery.height(9),
                     width: mediaQuery.width(30),
-                    child: Image.asset(
-                        ImageAssets.fbImage
-                    ),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Color(0xFFE8E8E8)
 
+                    ),
+                    child: Image.asset(
+                        ImageAssets.fbImage
                     )
                 )
               ],
@@ -144,7 +141,7 @@ class LoginScreen1 extends StatelessWidget {
           ),
           Spacer(),
           Padding(
-            padding: mediaQuery.paddingOnly(bottom: 2),
+            padding: mediaQuery.paddingOnly(bottom: 1),
             child: InkWell(
               onTap: (){
                 Get.toNamed(RouteName.SignupScreen1);

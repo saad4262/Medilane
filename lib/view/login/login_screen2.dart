@@ -1,11 +1,8 @@
 
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:medilane/res/assets/image_assets.dart';
 import 'package:medilane/res/colors/app_color.dart';
 
@@ -142,7 +139,7 @@ class LoginScreen2 extends StatelessWidget {
         authController.isLoading.value = true;
 
 
-        Get.to(() => CustomShimmerScreen());
+        // Get.to(() => CustomShimmerScreen());
 
 
         bool isSuccess = await authController.login(
@@ -217,14 +214,14 @@ class LoginScreen2 extends StatelessWidget {
         
                       height: mediaQuery.height(9),
                       width: mediaQuery.width(30),
-                      child: Image.asset(
-        
-                          ImageAssets.googleImage
-                      ),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Color(0xFFE8E8E8)
         
+                      ),
+                      child: Image.asset(
+        
+                          ImageAssets.googleImage
                       ),
                     ),
                   ),
@@ -232,13 +229,13 @@ class LoginScreen2 extends StatelessWidget {
                   Container(
                       height: mediaQuery.height(9),
                       width: mediaQuery.width(30),
-                      child: Image.asset(
-                          ImageAssets.fbImage
-                      ),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Color(0xFFE8E8E8)
         
+                      ),
+                      child: Image.asset(
+                          ImageAssets.fbImage
                       )
                   )
                 ],

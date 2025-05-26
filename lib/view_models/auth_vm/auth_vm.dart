@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart'; // ✅ Import Firestore
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,9 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medilane/res/colors/app_color.dart';
+import 'package:medilane/view/home/home_screen.dart';
+import 'package:medilane/view/login/login_screen1.dart';
+import 'package:path/path.dart' as path;
+
 
 import '../../models/auth/user_model.dart';
 import '../../repository/auth-repo/auth_repo.dart';
+
+
 
 class AuthController extends GetxController {
   final AuthRepository _authRepository = AuthRepository();
@@ -27,12 +32,15 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
   Rx<UserModel?> user = Rx<UserModel?>(null);
 
+
   @override
   void onInit() {
     super.onInit();
 
     User? firebaseUser = _auth.currentUser;
     if (firebaseUser != null) {
+      fetchUserProfile(firebaseUser.uid);  // ✅ Fetch profile image from Firestore
+
       user.value = UserModel(
         uid: firebaseUser.uid,
         username: firebaseUser.displayName ?? "",
@@ -44,6 +52,8 @@ class AuthController extends GetxController {
 
     _auth.authStateChanges().listen((User? newUser) {
       if (newUser != null) {
+        fetchUserProfile(newUser.uid);  // ✅ Fetch updated data when user logs in
+
         user.value = UserModel(
           uid: newUser.uid,
           username: newUser.displayName ?? "",
@@ -96,10 +106,13 @@ class AuthController extends GetxController {
 
   }
 
+
+
+
   void logout() async {
     await _authRepository.logout();
     user.value = null;
-    // Get.offAll(LoginScreen());
+    Get.offAll(LoginScreen1());
   }
 
   void setGender(String gender) {
@@ -120,33 +133,116 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> fetchUserProfile(String uid) async {
+    try {
+      DocumentSnapshot userDoc =
+      await FirebaseFirestore.instance.collection('users').doc(uid).get();
 
+      if (userDoc.exists) {
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+
+        profileImage.value = userData['profileImage'] ?? ''; // ✅ Update profile image
+        user.value = UserModel(
+          uid: uid,
+          username: userData['username'] ?? '',
+          email: userData['email'] ?? '',
+          profilePic: userData['profileImage'] ?? '', // ✅ Ensure correct mapping
+          phone: userData['phone'] ?? '',
+        );
+      }
+    } catch (e) {
+      print("Error fetching user profile: $e");
+    }
+  }
+
+//   Future<void> uploadImageToFirebase() async {
+//     if (selectedImage.value == null) return;
+//
+//     try {
+//       final AuthController authController = Get.find<AuthController>(); // Get the AuthController instance
+// print(authController.user.value!.uid);
+//       final storageRef = FirebaseStorage.instance
+//           .ref()
+//           .child("profile_images/${authController.user.value!.uid}.jpg");
+//
+//
+//       // TaskSnapshot snapshot = await storageRef.putFile(selectedImage.value!);
+//       // if (snapshot.state == TaskState.success) {
+//       //   String downloadURL = await snapshot.ref.getDownloadURL();
+//       //   // Continue as normal
+//       // } else {
+//       //   print("Upload failed");
+//       // }
+//       String downloadURL = await storageRef.getDownloadURL();
+//
+//       // Update profile image in Firestore
+//       await FirebaseFirestore.instance
+//           .collection('users')
+//           .doc(authController.user.value!.uid)
+//           .update({'profileImage': downloadURL});
+//
+//       // Update locally
+//       profileImage.value = downloadURL;
+//       // user.value!.profilePic = downloadURL;  // ✅ Update locally
+//       user.update((user) {
+//         if (user != null) {
+//           user.profilePic = downloadURL;
+//         }
+//       }); // ✅ Update locally
+//
+//     } catch (e) {
+//       print("Error uploading image: $e");
+//     }
+//   }
   Future<void> uploadImageToFirebase() async {
     if (selectedImage.value == null) return;
 
     try {
-      final AuthController authController = Get.find<AuthController>(); // Get the AuthController instance
+      final AuthController authController = Get.find<AuthController>();
+
+      final userId = authController.user.value?.uid;
+      if (userId == null) {
+        print("❌ UID is null. Make sure user is logged in.");
+        return;
+      }
+
+      print("Uploading for UID: $userId");
+
+
+      String fileExtension = path.extension(selectedImage.value!.path); // e.g., ".png"
 
       final storageRef = FirebaseStorage.instance
           .ref()
-          .child("profile_images/${authController.user.value!.uid}.jpg");
+          .child("profile_images/$userId$fileExtension");
 
-      await storageRef.putFile(selectedImage.value!);
-      String downloadURL = await storageRef.getDownloadURL();
+      // ✅ Upload the file
+      UploadTask uploadTask = storageRef.putFile(selectedImage.value!);
+      TaskSnapshot snapshot = await uploadTask;
 
-      // Update profile image in Firestore
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(authController.user.value!.uid)
-          .update({'profileImage': downloadURL});
+      if (snapshot.state == TaskState.success) {
+        // ✅ Get download URL AFTER successful upload
+        String downloadURL = await snapshot.ref.getDownloadURL();
+        print("✅ Download URL: $downloadURL");
 
-      // Update locally
-      profileImage.value = downloadURL;
-      user.value!.profilePic = downloadURL;  // ✅ Update locally
+        // ✅ Update profile image in Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .update({'profileImage': downloadURL});
 
+        // ✅ Update locally
+        profileImage.value = downloadURL;
+        user.update((user) {
+          if (user != null) {
+            user.profilePic = downloadURL;
+          }
+        });
+      } else {
+        print("❌ Upload failed with state: ${snapshot.state}");
+      }
 
     } catch (e) {
-      print("Error uploading image: $e");
+      print("❌ Error uploading image: $e");
     }
   }
 
@@ -180,7 +276,35 @@ class AuthController extends GetxController {
   // }
 
 
-  Future<void> updateProfile(String uid, String phone, String dob, String gender, void showSuccessBottomSheet) async {
+  // Future<void> updateProfile( String uid,
+  //     String username,
+  //     String email,
+  //     String phone,
+  //     String dob,
+  //     String gender, VoidCallback onSuccess,) async {
+  //   isLoading.value = true;
+  //
+  //   try {
+  //     await FirebaseFirestore.instance.collection('users').doc(uid).update({
+  //       'phone': phone,
+  //       'username': username,
+  //       'email': email,
+  //       'dob': dob,
+  //       'gender': gender,
+  //       'profileImage': profileImage.value, // Ensure this has the Firebase Storage URL
+  //     });
+  //
+  //     onSuccess();
+  //     Get.snackbar("Login", "Account Created Successfully", backgroundColor: Colors.green);
+  //   } catch (e) {
+  //     Get.snackbar("Error", "Failed to update profile: $e");
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+  //
+
+  Future<void> updateProfile(String uid,String username,String email, String phone ,String dob, String gender, void showSuccessBottomSheet) async {
     isLoading.value = true;
 
     try {
@@ -188,6 +312,9 @@ class AuthController extends GetxController {
         'phone': phone,
         'dob': dob,
         'gender': gender,
+        'email':email,
+        'username':username,
+
         'profileImage': profileImage.value, // Ensure this has the Firebase Storage URL
       });
 
@@ -198,7 +325,6 @@ class AuthController extends GetxController {
       isLoading.value = false;
     }
   }
-
 
 
   // Future<void> updateProfile(String username, String phone) async {
@@ -228,4 +354,9 @@ class AuthController extends GetxController {
   //   }
   //   }
 
+
+
+
 }
+
+
